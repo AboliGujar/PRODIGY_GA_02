@@ -1,0 +1,27 @@
+
+Using pre-trained generative models like DALL·E mini (now known as Craiyon) or Stable Diffusion, you can create images from text prompts with minimal setup. Here's how you can get started with both:
+
+🎨 1. Using Stable Diffusion (Locally or with Hugging Face)
+ Using Hugging Face Diffusers Install necessary packages:
+
+bash
+Copy
+Edit
+pip install diffusers transformers accelerate torch
+Run image generation with Stable Diffusion:
+
+python
+Copy
+Edit
+from diffusers import StableDiffusionPipeline
+import torch
+
+pipe = StableDiffusionPipeline.from_pretrained(
+    "runwayml/stable-diffusion-v1-5",
+    torch_dtype=torch.float16,
+).to("cuda")
+
+prompt = "A futuristic cityscape at sunset, cyberpunk style"
+image = pipe(prompt).images[0]
+image.save("generated_image.png")
+You can also use from_pretrained("stabilityai/stable-diffusion-2-1") for a newer version.
